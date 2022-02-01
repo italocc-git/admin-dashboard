@@ -1,4 +1,4 @@
-import {Input , Button , Form  } from 'antd'
+import {Input , Button , Form  , notification} from 'antd'
 import {useHistory} from 'react-router-dom'
 import {  Rule } from 'antd/lib/form'
 import {Container , Content , Footer , ContentTitle} from '../styles/stylesPage'
@@ -27,7 +27,9 @@ export function CreatePage() {
         const data = form.getFieldsValue()
         
          dispatch(addUserToList(data)) 
-        
+         notification.success({
+            message:'User created'
+        })
          history.push('/') 
         
     }

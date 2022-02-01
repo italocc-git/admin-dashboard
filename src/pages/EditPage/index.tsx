@@ -66,7 +66,7 @@ export function EditPage() {
 
         }
             getUserData()
-    },[id])
+    },[form,users,id])
 
     return (
         <Container>

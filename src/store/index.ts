@@ -2,7 +2,7 @@ import { applyMiddleware, createStore} from 'redux'
 import rootReducer from './modules/rootReducer'
 import createSagaMiddleware from 'redux-saga'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import rootSaga from './modules/rootSaga'
+
 export type userData = {
     id: number,
     name: string,

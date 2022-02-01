@@ -1,4 +1,3 @@
-/* Dados do usuário ficam aqui, devem ser retornados aqui */
 import { Reducer } from 'redux'
 import {UserData} from './types'
 
@@ -11,7 +10,7 @@ const users : Reducer<UserData[]>=  (state = INITIAL_STATE, action : any) =>{
         
         case 'ADD_USER_TO_LIST' : {
             const {user} = action.payload
-            console.log(user)
+            
             
             return [
                 ...state,

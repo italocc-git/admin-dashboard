@@ -6,8 +6,6 @@ export const Container = styled.div`
     flex-direction : column;
     justify-content: center;
     align-items:center;
-
-    
 `
 
 export const Content = styled.div`

@@ -16,16 +16,8 @@ export type userData = {
 const globalservices = {
      getUsersDataList() {
         return api.get<userData[]>('data').then(response => response.data)
-    },
-    getUserById(id : number){
-        return api.get(`data?id=${id}`)
-    },
-    createDataUser(){
-        /* return api.post('/posts') */
-    },
-    editDataUser(){
-        
     }
+   
 }
 
 export default globalservices
