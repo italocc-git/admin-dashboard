@@ -48,7 +48,8 @@ export function EditPage() {
         
         const submitData = {
             ...form.getFieldsValue(),
-            id : Number(id)
+            id : Number(id),
+            ableToEdit : true
         }
         dispatch(editUserFromList(submitData))
         notification.success({
@@ -60,7 +61,7 @@ export function EditPage() {
         async function getUserData(){
             const data = users.find(item => item.id === Number(id))
              if(data){
-                form.setFieldsValue({...data , city : data.address?.city})
+                form.setFieldsValue({...data , city : data.address?.city })
  
              }
 

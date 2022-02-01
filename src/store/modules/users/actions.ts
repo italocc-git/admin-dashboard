@@ -3,6 +3,7 @@ export type userData = {
     name: string,
     username?: string,
     email: string
+    ableToEdit ?: boolean
     address?: {
       street: string,
       suite: string,

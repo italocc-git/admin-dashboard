@@ -5,7 +5,7 @@ import  { useHistory } from 'react-router-dom'
 import { IState } from '../../store';
 import { deleteUserFromList  } from '../../store/modules/users/actions';
 import {Header , HeaderTitle} from './styles'
-
+import {getUsersDataList} from './services'
 
 
 export type userData = {
@@ -28,7 +28,7 @@ export const Table = () => {
 
   const dispatch = useDispatch()
   const users = useSelector<IState, userData[]>(state =>  state.users)
-    
+  const [dataUsers, setDataUsers] = React.useState<userData[]>([])  
   
     const handleEdit= (idUser : number) => {
       history.push(`editUser/${idUser}`)
@@ -73,7 +73,7 @@ export const Table = () => {
           title: 'Edit',
           key: 'edit',
           render : (row : any) => {
-              return <Button key={row.id} type='primary' onClick={() => handleEdit(row.id)}>EDIT</Button>
+              return <Button key={row.id} disabled={row.ableToEdit === undefined} type='primary' onClick={() => handleEdit(row.id)}>EDIT</Button>
             
           }
         },
@@ -83,13 +83,22 @@ export const Table = () => {
             render : (row : any) => {
                return (
                <Popconfirm key={row.id}  title='Do you wanna remove ?' onConfirm={() => handleDelete(row.id)}>
-                  <Button type='ghost' >DELETE</Button> 
+                  <Button disabled={row.ableToEdit === undefined} type='ghost' >DELETE</Button> 
                </Popconfirm>
                
                )
               }
           },
       ];
+
+      React.useEffect(() => {
+        async function load() {
+          const data = await getUsersDataList()
+          
+          setDataUsers([...data , ...users])
+        }
+        load()
+      },[users])
 
   
     return (
@@ -98,7 +107,7 @@ export const Table = () => {
                     <HeaderTitle>User list</HeaderTitle>
                     <Button type='primary' onClick={() => {history.push('/createUser')}}>Add New User</Button>
                 </Header>
-                <TableAntd  columns={columns}  dataSource={users} pagination={false} locale={{emptyText : 'No User Found'  }}/> 
+                <TableAntd  columns={columns}  dataSource={dataUsers} pagination={false} locale={{emptyText : 'No User Found'  }}/> 
         </>
     )
 }

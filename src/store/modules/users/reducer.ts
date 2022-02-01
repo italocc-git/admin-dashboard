@@ -10,7 +10,7 @@ const users : Reducer<UserData[]>=  (state = INITIAL_STATE, action : any) =>{
         
         case 'ADD_USER_TO_LIST' : {
             const {user} = action.payload
-            
+            console.log(user)
             
             return [
                 ...state,
@@ -19,7 +19,6 @@ const users : Reducer<UserData[]>=  (state = INITIAL_STATE, action : any) =>{
                     id : state.length+1
                 }
             ]
-
         }
 
 
