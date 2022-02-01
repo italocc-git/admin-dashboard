@@ -1,6 +1,8 @@
-import { createStore} from 'redux'
+import { applyMiddleware, createStore} from 'redux'
 import rootReducer from './modules/rootReducer'
-
+import createSagaMiddleware from 'redux-saga'
+import {composeWithDevTools} from 'redux-devtools-extension'
+import rootSaga from './modules/rootSaga'
 export type userData = {
     id: number,
     name: string,
@@ -17,8 +19,15 @@ export type userData = {
 export interface IState {
     users : userData[]
 }
+const sagaMiddleware = createSagaMiddleware()
 
-const store = createStore(rootReducer)
+const middlewares = [sagaMiddleware]
 
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(...middlewares))
+  )
 
+ /*  sagaMiddleware.run(rootSaga) */
+  
 export default store

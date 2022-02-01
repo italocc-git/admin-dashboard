@@ -44,7 +44,8 @@ import {
         
      .ant-form-item-required {
         color:#fff;
-     }   
+     }
+       
   `
   
   export default GlobalStyles

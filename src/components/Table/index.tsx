@@ -3,8 +3,10 @@ import { Table as TableAntd, Button , Popconfirm , notification  } from 'antd';
 import {   useDispatch, useSelector } from 'react-redux';
 import  { useHistory } from 'react-router-dom'
 import { IState } from '../../store';
-import { deleteUserFromList } from '../../store/modules/users/actions';
+import { deleteUserFromList  } from '../../store/modules/users/actions';
 import {Header , HeaderTitle} from './styles'
+
+
 
 export type userData = {
   id: number,
@@ -25,8 +27,7 @@ export const Table = () => {
   const history = useHistory()
 
   const dispatch = useDispatch()
-    
-  const users = useSelector<IState, userData[]>(state => state.users)
+  const users = useSelector<IState, userData[]>(state =>  state.users)
     
   
     const handleEdit= (idUser : number) => {
@@ -37,11 +38,10 @@ export const Table = () => {
         dispatch(deleteUserFromList(id))
         notification.success({
           message: 'User deleted',
-
         })
-      
     }
 
+    
     
     const columns = [
         {
@@ -53,7 +53,6 @@ export const Table = () => {
           title: 'Name',
           dataIndex: 'name',
           key: 'name',
-          
         },
         {
           title: 'Username',
@@ -91,6 +90,7 @@ export const Table = () => {
               }
           },
       ];
+
   
     return (
         <>

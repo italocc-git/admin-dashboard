@@ -6,15 +6,20 @@ export const Container = styled.div`
     flex-direction : column;
     justify-content: center;
     align-items:center;
-`
 
-export const Content = styled.div`
-    color:#fff;
-    width:500px;
     
 `
 
+export const Content = styled.div`
+    label {
+        color:#fff;
+        font-weight:bold;
+    }
+    width:500px;
+`
+
 export const Footer = styled.div`
+
     display: flex;
     align-items : center;
     justify-content : end;
@@ -31,4 +36,10 @@ export const Footer = styled.div`
         }
         
     }
+`
+
+export const ContentTitle = styled.h1`
+    display: flex;
+    justify-content:center;
+
 `

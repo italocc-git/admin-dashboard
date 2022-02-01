@@ -1,7 +1,7 @@
 import {Input , Button , Form  } from 'antd'
 import {useHistory} from 'react-router-dom'
 import {  Rule } from 'antd/lib/form'
-import {Container , Content , Footer} from './style'
+import {Container , Content , Footer , ContentTitle} from '../styles/stylesPage'
 import { addUserToList } from '../../store/modules/users/actions';
 import { useDispatch } from 'react-redux'
 
@@ -25,10 +25,9 @@ export function CreatePage() {
 
     const handleSubmit = () => {
         const data = form.getFieldsValue()
-        console.log(data)
+        
          dispatch(addUserToList(data)) 
-       
-        /* createUser(form.getFieldsValue()) */
+        
          history.push('/') 
         
     }
@@ -45,6 +44,7 @@ export function CreatePage() {
                 
             >
                 <Content>
+                <ContentTitle> Create User Page </ContentTitle>
                     <Item label='Name :' name='name'  rules={[requiredRule]}>
                         <Input name='name'  />
                     </Item>

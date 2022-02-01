@@ -2,17 +2,17 @@
 import { Reducer } from 'redux'
 import {UserData} from './types'
 
-
-
 const INITIAL_STATE : UserData[] = []
 
-const users : Reducer<UserData[]>= (state = INITIAL_STATE, action : any) =>{
+const users : Reducer<UserData[]>=  (state = INITIAL_STATE, action : any) =>{
     
 
     switch(action.type){
         
         case 'ADD_USER_TO_LIST' : {
             const {user} = action.payload
+            console.log(user)
+            
             return [
                 ...state,
                 {
@@ -23,11 +23,12 @@ const users : Reducer<UserData[]>= (state = INITIAL_STATE, action : any) =>{
 
         }
 
+
         case 'EDIT_USER_FROM_LIST' : {
             const {user} = action.payload
             
             const newList = state.map(item => item.id === user.id ? user : item)
-            console.log(newList)
+            
             return newList
         }
 

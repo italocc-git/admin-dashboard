@@ -1,8 +1,8 @@
 import React from 'react'
-import {Input , Button , Form } from 'antd'
+import {Input , Button , Form  , notification } from 'antd'
 import {useHistory, useParams} from 'react-router-dom'
 import {  Rule } from 'antd/lib/form'
-import {Container , Content , Footer} from './style'
+import {Container , Content , Footer , ContentTitle} from '../styles/stylesPage'
 import { useDispatch, useSelector } from 'react-redux'
 import { IState } from '../../store';
 import { editUserFromList } from '../../store/modules/users/actions'
@@ -51,7 +51,9 @@ export function EditPage() {
             id : Number(id)
         }
         dispatch(editUserFromList(submitData))
-        
+        notification.success({
+            message:'User edited'
+        })
         history.push('/')
     }
     React.useEffect(() => {
@@ -73,10 +75,14 @@ export function EditPage() {
                 name='userForm'
                 form={form}
                 onFinish={handleSubmit}
+                layout='vertical'
+                requiredMark={false}
+                
 
             >
                 <Content>
-                    <Item label='Name' name='name'  rules={[requiredRule]}>
+                    <ContentTitle> Edit User Page </ContentTitle>
+                    <Item label='Name' name='name' rules={[requiredRule]}>
                         <Input name='name'  />
                     </Item>
                     <Item label='Username' name='username' >
@@ -94,7 +100,7 @@ export function EditPage() {
                     <Button onClick={handleCancel}>
                         Cancel
                     </Button>
-                    <Button onClick={form.submit}>
+                    <Button onClick={form.submit} type='primary'>
                         Submit
                     </Button>
                 </Footer>
