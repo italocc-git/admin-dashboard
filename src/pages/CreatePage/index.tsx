@@ -17,6 +17,10 @@ export function CreatePage() {
         required: true,
         message: 'Field is required.'
       }
+    const emailRule : Rule = {
+        type:'email',
+        message:'Enter a valid e-mail address'
+    }  
       
     const handleCancel = () => {
         form.resetFields()
@@ -50,7 +54,7 @@ export function CreatePage() {
                     <Item label='Name :' name='name'  rules={[requiredRule]}>
                         <Input name='name'  />
                     </Item>
-                    <Item label='Email :' name='email' rules={[requiredRule]}>
+                    <Item label='Email :' name='email' rules={[requiredRule , emailRule]}>
                         <Input name='email' />
                     </Item>
                     

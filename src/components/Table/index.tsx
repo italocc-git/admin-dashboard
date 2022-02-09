@@ -82,7 +82,7 @@ export const Table = () => {
             key: 'delete',
             render : (row : any) => {
                return (
-               <Popconfirm key={row.id}  title='Do you wanna remove ?' onConfirm={() => handleDelete(row.id)}>
+               <Popconfirm disabled={row.ableToEdit === undefined} key={row.id}  title='Do you wanna remove ?' onConfirm={() => handleDelete(row.id)}>
                   <Button disabled={row.ableToEdit === undefined} type='ghost' >DELETE</Button> 
                </Popconfirm>
                
