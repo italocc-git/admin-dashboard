@@ -8,6 +8,7 @@ import {Header , HeaderTitle} from './styles'
 import {getUsersDataList} from './services'
 
 
+
 export type userData = {
   id: number,
   name: string,
@@ -94,8 +95,8 @@ export const Table = () => {
       React.useEffect(() => {
         async function load() {
           const data = await getUsersDataList()
-          
-          setDataUsers([...data , ...users])
+          const dataFormatted = data.map((item : userData) => ({...item , city: item.address?.city}))
+          setDataUsers([...dataFormatted , ...users])
         }
         load()
       },[users])
