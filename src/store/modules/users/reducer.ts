@@ -1,9 +1,9 @@
 import { Reducer } from 'redux'
-import {UserData} from './types'
+import {userData} from '../../../types'
 
-const INITIAL_STATE : UserData[] = []
+const INITIAL_STATE : userData[] = []
 
-const users : Reducer<UserData[]>=  (state = INITIAL_STATE, action : any) =>{
+const users : Reducer<userData[]>=  (state = INITIAL_STATE, action : any) =>{
     
 
     switch(action.type){
@@ -14,13 +14,11 @@ const users : Reducer<UserData[]>=  (state = INITIAL_STATE, action : any) =>{
         }
         case 'ADD_USER_TO_LIST' : {
             const {user} = action.payload
-            console.log(user)
-            
             return [
                 ...state,
                 {
                     ...user,
-                    id : state.length+1
+                    id : (state[state.length - 1]?.id || 0) + 1
                 }
             ]
         }

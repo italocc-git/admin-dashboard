@@ -6,20 +6,8 @@ import {Container , Content , Footer , ContentTitle} from '../styles/stylesPage'
 import { useDispatch, useSelector } from 'react-redux'
 import { IState } from '../../store';
 import { editUserFromList } from '../../store/modules/users/actions'
+import {userData} from '../../types'
 
-export type userData = {
-    id: number,
-    name: string,
-    username?: string,
-    email: string
-    address?: {
-      street: string,
-      suite: string,
-      city: string,
-      zipcode: string,    
-  
-  }
-  }
 type params  = {
     id : string
 }
@@ -48,8 +36,7 @@ export function EditPage() {
         
         const submitData = {
             ...form.getFieldsValue(),
-            id : Number(id),
-            ableToEdit : true
+            id : Number(id)
         }
         dispatch(editUserFromList(submitData))
         notification.success({
@@ -61,8 +48,7 @@ export function EditPage() {
         async function getUserData(){
             const data = users.find(item => item.id === Number(id))
              if(data){
-                form.setFieldsValue({...data , city : data.address?.city })
- 
+                form.setFieldsValue(data)
              }
 
         }

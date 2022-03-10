@@ -30,7 +30,7 @@ export function CreatePage() {
     const handleSubmit = () => {
         const data = form.getFieldsValue()
         
-         dispatch(addUserToList({...data , ableToEdit : true})) 
+         dispatch(addUserToList(data)) 
          notification.success({
             message:'User created'
         })

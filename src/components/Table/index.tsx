@@ -6,23 +6,8 @@ import { IState } from '../../store';
 import { deleteUserFromList, loadUsersFromApi  } from '../../store/modules/users/actions';
 import {Header , HeaderTitle} from './styles'
 import {getUsersDataList} from './services'
-
-
-
-export type userData = {
-  id: number,
-  name: string,
-  username?: string,
-  email: string
-  address?: {
-    street: string,
-    suite: string,
-    city: string,
-    zipcode: string,    
-
-}
-  ableToEdit?: boolean
-}
+import {userData} from '../../types'
+/* Amanhã refatorar e usar o princípio do sagax */
 
 
 export const Table = () => {
@@ -30,7 +15,6 @@ export const Table = () => {
 
   const dispatch = useDispatch()
   const users = useSelector<IState, userData[]>(state =>  state.users)
-  /* const [dataUsers, setDataUsers] = React.useState<userData[]>([])   */
   
     const handleEdit= (idUser : number) => {
       history.push(`editUser/${idUser}`)
@@ -42,9 +26,6 @@ export const Table = () => {
           message: 'User deleted',
         })
     }
-
-    
-    
     const columns = [
         {
           title: 'ID',
@@ -85,7 +66,7 @@ export const Table = () => {
             render : (row : any) => {
                return (
                <Popconfirm  key={row.id}  title='Do you wanna remove ?' onConfirm={() => handleDelete(row.id)}>
-                  <Button  type='ghost' >DELETE</Button> 
+                  <Button danger >DELETE</Button> 
                </Popconfirm>
                
                )
@@ -96,23 +77,20 @@ export const Table = () => {
       React.useEffect(() => {
         async function load() {
           const data = await getUsersDataList()
-           /* const dataFormatted = data.map((item : userData) => (
-             {
-              id: item.id ,
-              name: item.name,
-              username: item.username,
-              city: item.address?.city,
-              email: item.email,
+          
+            if(users.length === 0 && data){
+              const dataFormatted = data.map((item : userData) => (
+                {
+                 id: item.id ,
+                 name: item.name,
+                 username: item.username,
+                 city: item.address?.city,
+                 email: item.email,
+               }
+               )) 
+              dispatch(loadUsersFromApi(dataFormatted))
             }
-            )) */
-             const isAlreadyLoaded = users.find(item => item.ableToEdit)
-
-            if(isAlreadyLoaded?.ableToEdit === true) return 
-
-            dispatch(loadUsersFromApi(data))
             
-            
-          /* setDataUsers([...dataFormatted , ...users]) */
         }
         load()
       },[dispatch])
@@ -121,7 +99,7 @@ export const Table = () => {
     return (
         <>
                 <Header >
-                    <HeaderTitle>User list</HeaderTitle>
+                    <HeaderTitle>Users list</HeaderTitle>
                     <Button type='primary' onClick={() => {history.push('/createUser')}}>Add New User</Button>
                 </Header>
                 <TableAntd  columns={columns}  dataSource={users} pagination={false} locale={{emptyText : 'No User Found'  }}/> 

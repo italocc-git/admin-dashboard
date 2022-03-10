@@ -1,23 +1,9 @@
-export type userData = {
-    id: number,
-    name: string,
-    username?: string,
-    email: string
-    ableToEdit ?: boolean
-    address?: {
-      street: string,
-      suite: string,
-      city: string,
-      zipcode: string,    
-  }
-    isLoaded: boolean
-  }
+import {userData} from '../../../types'
 export function loadUsersFromApi(userList: userData[]){
     return {
         type:'LOAD_USERS',
         payload : {
             userList,
-            isLoaded : true,
         }
     }
 }
@@ -29,9 +15,6 @@ export function addUserToList(user : userData){
         }
     }
 }
-
-
-
 
 export function editUserFromList(user : userData){
     return {
