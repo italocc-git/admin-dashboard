@@ -9,9 +9,18 @@ export type userData = {
       suite: string,
       city: string,
       zipcode: string,    
-  
   }
+    isLoaded: boolean
   }
+export function loadUsersFromApi(userList: userData[]){
+    return {
+        type:'LOAD_USERS',
+        payload : {
+            userList,
+            isLoaded : true,
+        }
+    }
+}
 export function addUserToList(user : userData){
     return {
         type:'ADD_USER_TO_LIST',

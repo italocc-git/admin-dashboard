@@ -7,7 +7,11 @@ const users : Reducer<UserData[]>=  (state = INITIAL_STATE, action : any) =>{
     
 
     switch(action.type){
-        
+        case 'LOAD_USERS': {
+            const {userList} = action.payload
+
+            return [...state , ...userList]
+        }
         case 'ADD_USER_TO_LIST' : {
             const {user} = action.payload
             console.log(user)

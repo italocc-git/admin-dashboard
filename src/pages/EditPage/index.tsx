@@ -78,8 +78,6 @@ export function EditPage() {
                 onFinish={handleSubmit}
                 layout='vertical'
                 requiredMark={false}
-                
-
             >
                 <Content>
                     <ContentTitle> Edit User Page </ContentTitle>

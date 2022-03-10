@@ -3,7 +3,7 @@ import { Table as TableAntd, Button , Popconfirm , notification  } from 'antd';
 import {   useDispatch, useSelector } from 'react-redux';
 import  { useHistory } from 'react-router-dom'
 import { IState } from '../../store';
-import { deleteUserFromList  } from '../../store/modules/users/actions';
+import { deleteUserFromList, loadUsersFromApi  } from '../../store/modules/users/actions';
 import {Header , HeaderTitle} from './styles'
 import {getUsersDataList} from './services'
 
@@ -21,6 +21,7 @@ export type userData = {
     zipcode: string,    
 
 }
+  ableToEdit?: boolean
 }
 
 
@@ -29,7 +30,7 @@ export const Table = () => {
 
   const dispatch = useDispatch()
   const users = useSelector<IState, userData[]>(state =>  state.users)
-  const [dataUsers, setDataUsers] = React.useState<userData[]>([])  
+  /* const [dataUsers, setDataUsers] = React.useState<userData[]>([])   */
   
     const handleEdit= (idUser : number) => {
       history.push(`editUser/${idUser}`)
@@ -74,7 +75,7 @@ export const Table = () => {
           title: 'Edit',
           key: 'edit',
           render : (row : any) => {
-              return <Button key={row.id} disabled={row.ableToEdit === undefined} type='primary' onClick={() => handleEdit(row.id)}>EDIT</Button>
+              return <Button key={row.id}  type='primary' onClick={() => handleEdit(row.id)}>EDIT</Button>
             
           }
         },
@@ -83,8 +84,8 @@ export const Table = () => {
             key: 'delete',
             render : (row : any) => {
                return (
-               <Popconfirm disabled={row.ableToEdit === undefined} key={row.id}  title='Do you wanna remove ?' onConfirm={() => handleDelete(row.id)}>
-                  <Button disabled={row.ableToEdit === undefined} type='ghost' >DELETE</Button> 
+               <Popconfirm  key={row.id}  title='Do you wanna remove ?' onConfirm={() => handleDelete(row.id)}>
+                  <Button  type='ghost' >DELETE</Button> 
                </Popconfirm>
                
                )
@@ -95,11 +96,26 @@ export const Table = () => {
       React.useEffect(() => {
         async function load() {
           const data = await getUsersDataList()
-          const dataFormatted = data.map((item : userData) => ({...item , city: item.address?.city}))
-          setDataUsers([...dataFormatted , ...users])
+           /* const dataFormatted = data.map((item : userData) => (
+             {
+              id: item.id ,
+              name: item.name,
+              username: item.username,
+              city: item.address?.city,
+              email: item.email,
+            }
+            )) */
+             const isAlreadyLoaded = users.find(item => item.ableToEdit)
+
+            if(isAlreadyLoaded?.ableToEdit === true) return 
+
+            dispatch(loadUsersFromApi(data))
+            
+            
+          /* setDataUsers([...dataFormatted , ...users]) */
         }
         load()
-      },[users])
+      },[dispatch])
 
   
     return (
@@ -108,7 +124,7 @@ export const Table = () => {
                     <HeaderTitle>User list</HeaderTitle>
                     <Button type='primary' onClick={() => {history.push('/createUser')}}>Add New User</Button>
                 </Header>
-                <TableAntd  columns={columns}  dataSource={dataUsers} pagination={false} locale={{emptyText : 'No User Found'  }}/> 
+                <TableAntd  columns={columns}  dataSource={users} pagination={false} locale={{emptyText : 'No User Found'  }}/> 
         </>
     )
 }

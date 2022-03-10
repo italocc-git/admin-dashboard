@@ -15,7 +15,7 @@ export type userData = {
 }
 const globalservices = {
      getUsersDataList() {
-        return api.get<userData[]>('data').then(response => response.data)
+        return api.get('data').then(response => response.data)
     }
    
 }
