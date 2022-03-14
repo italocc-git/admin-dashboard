@@ -127,7 +127,8 @@ export const Table = () => {
                 <TableAntd 
                   columns={columns}
                   bordered
-                  size='middle'
+                  tableLayout='auto'
+                  
                   dataSource={users}
                   pagination={paginationConfig}
                   locale={{emptyText : 'No User Found'  }}/> 
