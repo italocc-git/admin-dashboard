@@ -1,5 +1,6 @@
 import React from 'react'
-import { Table as TableAntd, Button , Popconfirm , notification  } from 'antd';
+import { Table as TableAntd , Popconfirm , notification , Image, TablePaginationConfig  } from 'antd';
+import {UserDeleteOutlined , UserSwitchOutlined, UserAddOutlined, LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons'
 import {   useDispatch, useSelector } from 'react-redux';
 import  { useHistory } from 'react-router-dom'
 import { IState } from '../../store';
@@ -7,8 +8,10 @@ import { deleteUserFromList, loadUsersFromApi  } from '../../store/modules/users
 import {Header , HeaderTitle} from './styles'
 import {getUsersDataList} from './services'
 import {userData} from '../../types'
+import UsersImg from '../../assets/users.svg'
+import { ButtonComponent } from '../../components/Button'
 /* Amanhã refatorar e usar o princípio do sagax */
-
+/* Criar um botão padrão e atribuir um ícone */
 
 export const Table = () => {
   const history = useHistory()
@@ -55,18 +58,23 @@ export const Table = () => {
         {
           title: 'Edit',
           key: 'edit',
+          width:'8%',
           render : (row : any) => {
-              return <Button key={row.id}  type='primary' onClick={() => handleEdit(row.id)}>EDIT</Button>
+              return <ButtonComponent key={row.id}  type='primary' 
+              name='EDIT'
+              icon={<UserSwitchOutlined />}
+              onClick={() => handleEdit(row.id)}/>
             
           }
         },
         {
             title: 'Delete',
             key: 'delete',
+            width:'8%',
             render : (row : any) => {
                return (
                <Popconfirm  key={row.id}  title='Do you wanna remove ?' onConfirm={() => handleDelete(row.id)}>
-                  <Button danger >DELETE</Button> 
+                  <ButtonComponent icon={<UserDeleteOutlined />} danger name='DELETE'/> 
                </Popconfirm>
                
                )
@@ -95,14 +103,34 @@ export const Table = () => {
         load()
       },[dispatch])
 
+      const styleConfig : React.CSSProperties ={
+        color: '#fff',
+        fontSize:'1.2rem'
+      }
+
+      const paginationConfig : TablePaginationConfig = {
+        defaultPageSize:10 ,
+        prevIcon: <LeftCircleOutlined style={styleConfig} />,
+        nextIcon: <RightCircleOutlined style={styleConfig}/>,
+        position: ['bottomCenter'],
+        responsive: true,
+      }
   
     return (
         <>
                 <Header >
-                    <HeaderTitle>Users list</HeaderTitle>
-                    <Button type='primary' onClick={() => {history.push('/createUser')}}>Add New User</Button>
+                    <HeaderTitle>Dashboard - Users list</HeaderTitle>
+                    <Image src={UsersImg} alt='users' preview={false} height={48} width={48} />
+                    <ButtonComponent type='primary' onClick={() => {history.push('/createUser')}}
+                    name='Add New User' icon={<UserAddOutlined />}/>
                 </Header>
-                <TableAntd  columns={columns}  dataSource={users} pagination={false} locale={{emptyText : 'No User Found'  }}/> 
+                <TableAntd 
+                  columns={columns}
+                  bordered
+                  size='middle'
+                  dataSource={users}
+                  pagination={paginationConfig}
+                  locale={{emptyText : 'No User Found'  }}/> 
         </>
     )
 }

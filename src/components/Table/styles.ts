@@ -5,6 +5,7 @@ export const Header = styled.div`
     display: flex;
     justify-content:space-between;
     align-items : center;
+    padding: 0 10px ;
 `
 
 export const HeaderTitle = styled.h1`

@@ -28,7 +28,7 @@ import {
       body {
         h1 {
           color:#fff;
-          font-family: 'Calibri Arial Black';
+          font-family: 'Roboto', sans-serif;
           font-size : 2rem;
           font-weight : bold;
         }

@@ -1,4 +1,6 @@
-import {Input , Button , Form  , notification} from 'antd'
+import {Input  , Form  , notification} from 'antd'
+import { ButtonComponent } from '../../components/Button'
+import {UserAddOutlined , CloseOutlined} from '@ant-design/icons'
 import {useHistory} from 'react-router-dom'
 import {  Rule } from 'antd/lib/form'
 import {Container , Content , Footer , ContentTitle} from '../styles/stylesPage'
@@ -60,12 +62,14 @@ export function CreatePage() {
                     
                 </Content>
                 <Footer>
-                    <Button onClick={handleCancel} >
-                        Cancel
-                    </Button>
-                    <Button onClick={form.submit} type='primary'>
-                        Submit
-                    </Button>
+                    <ButtonComponent onClick={handleCancel} name='Cancel' 
+                    icon={<CloseOutlined />}>
+                        
+                    </ButtonComponent>
+                    <ButtonComponent onClick={form.submit} type='primary' 
+                       icon={<UserAddOutlined/>} name='Submit'>
+                        
+                    </ButtonComponent>
                 </Footer>
             </Form>
         </Container>
