@@ -105,7 +105,7 @@ export const Table = () => {
             setLoading(false)
         }
         load()
-      },[dispatch])
+      },[dispatch, users])
 
       const styleConfig : React.CSSProperties ={
         color: '#fff',
