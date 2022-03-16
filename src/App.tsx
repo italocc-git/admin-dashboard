@@ -1,4 +1,4 @@
-import Routes from './routes';
+import Routes from './Routes';
 import {Provider} from 'react-redux'
 import store from './store'
 import GlobalStyles from './style/global';
