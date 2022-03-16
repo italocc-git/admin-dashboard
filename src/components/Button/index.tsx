@@ -9,7 +9,7 @@ interface Props extends ButtonProps {
 export const ButtonComponent = ({icon, mt , name, ...rest}: Props) => {
 
     return (
-        <Button marginTop={mt} {...rest}>
+        <Button margintop={mt} {...rest}>
             {icon && icon}
             <span>{name}</span>
         </Button>

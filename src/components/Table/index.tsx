@@ -17,8 +17,8 @@ export const Table = () => {
   const history = useHistory()
 
   const dispatch = useDispatch()
-  const users = useSelector<IState, userData[]>(state =>  state.users)
-  
+  const users = useSelector<IState, userData[]>(state => state.users)
+  const [loading , setLoading] = React.useState(false)
     const handleEdit= (idUser : number) => {
       history.push(`editUser/${idUser}`)
     }
@@ -84,9 +84,11 @@ export const Table = () => {
 
       React.useEffect(() => {
         async function load() {
-          const data = await getUsersDataList()
-          
-            if(users.length === 0 && data){
+          setLoading(true)
+
+          if(users.length === 0){
+            const data = await getUsersDataList()
+            if( data){
               const dataFormatted = data.map((item : userData) => (
                 {
                  id: item.id ,
@@ -95,10 +97,12 @@ export const Table = () => {
                  city: item.address?.city,
                  email: item.email,
                }
-               )) 
+               ))
+
               dispatch(loadUsersFromApi(dataFormatted))
             }
-            
+          }
+            setLoading(false)
         }
         load()
       },[dispatch])
@@ -127,8 +131,8 @@ export const Table = () => {
                 <TableAntd 
                   columns={columns}
                   bordered
+                  loading={loading}
                   tableLayout='auto'
-                  
                   dataSource={users}
                   pagination={paginationConfig}
                   locale={{emptyText : 'No User Found'  }}/> 

@@ -2,11 +2,11 @@ import styled from "styled-components";
 import {Button as ButtonAntd} from 'antd'
 
 type ButtonProps = {
-    marginTop?: string
+    margintop?: string
 }
 
 export const Button = styled(ButtonAntd)<ButtonProps>`
-    margin-top : ${(props) => props.marginTop};
+    margin-top : ${(props) => props.margintop};
     display: flex;
     justify-content:space-between;
     align-items : center;
