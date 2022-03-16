@@ -1,7 +1,7 @@
-import Routes from "./routes";
+import Routes from './routes';
 import {Provider} from 'react-redux'
 import store from './store'
-import GlobalStyles from "./style/global";
+import GlobalStyles from './style/global';
 function App() {
   return (
    
