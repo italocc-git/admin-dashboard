@@ -1,18 +1,18 @@
 # Admin Dashboard
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/italocc-git/admin-dashboard/blob/master/LICENSE) 
 
-# Sobre o projeto
+# About the project
 
 https://sharp-sinoussi-775e59.netlify.app/
 
-Admin Dashboard é uma aplicação CRUD para apresentação de dados de usuários fictícios utilizando uma api do [json-server](https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/). A aplicação não adiciona dados em um banco e portanto é apenas para apresentação de layout utilizando
-os recursos do AntDesign.
+Admin Dashboard is a CRUD application for presenting fictitious user data using a [json-server API](https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/). The application does not add data to a database and therefore is only for layout presentation using
+AntDesign features.
 
 ## Layout web
 ![Web](https://github.com/italocc-git/admin-dashboard/blob/master/src/assets/gif/gif-admin-dashboard.gif)
 
 
-# Tecnologias utilizadas
+# Technologies
 
 
 - HTML / CSS / JS / TypeScript
@@ -21,29 +21,29 @@ os recursos do AntDesign.
 - Styled Components
 - Antd
 
-## Implantação em produção
+## Implementation in production
 - Front end web: Netlify
 
-# Como executar o projeto
+# How to run the project
 
 ## Front end web
-Pré-requisitos: npm / yarn
+Prerequisites: npm / yarn
 
 ```bash
-# clonar repositório
+# clone the repository
 git clone https://github.com/italocc-git/admin-dashboard.git
 
-# entrar na pasta do projeto admin-dashboard
+# enter in the project folder admin-dashboard
 cd admin-dashboard
 
-# instalar dependências
+# install dependencies
 yarn install / npm install
 
-# executar o projeto
+# run the project
 yarn start / npm run start
 ```
 
-# Autor
+# Author
 
 Italo Costa Cavalcante
 
